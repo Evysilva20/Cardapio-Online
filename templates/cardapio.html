@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardápio Online</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>🍽️ Cardápio On-line</h1>
+
+    {% for categoria, itens in cardapio.items() %}  <!-- loop pelas categorias do cardápio (entradas, pratos principais, bebidas, drinks e sobremesas) -->
+        <h2>{{ categoria.title() }}</h2>  <!-- título da categoria, com a primeira letra maiúscula -->
+        <div class="categoria">
+            {% for item in itens %}  <!-- loop pelos itens dentro de cada categoria -->
+                <div class="item">
+                    <div class="nome-preco">
+                        <span class="nome">{{ item.nome }}</span>  <!-- nome do prato -->
+                        <span class="preco">R$ {{ "%.2f"|format(item.preco) }}</span>  <!-- preço formatado com duas casas decimais -->
+                    </div>
+                    <p class="descricao">{{ item.descricao }}</p>  <!-- descrição do prato -->
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+</body>
+</html>
